@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Headless test harness for Pachacuti.Core (no Unity needed). Compiles the
+    engine-free Core sources and the EditMode tests exactly as Unity does
+    (C# 9), and runs them with NUnit 3 — the same tests run in Unity's Test
+    Runner. Usage:  dotnet test tools/CoreTests
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <IsPackable>false</IsPackable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);NUnit2005;NUnit2006;NUnit2007;NUnit2015;NUnit2045</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../Assets/Pachacuti/Scripts/Core/**/*.cs" />
+    <Compile Include="../../Assets/Pachacuti/Tests/EditMode/**/*.cs" />
+    <None Include="../../Assets/Pachacuti/Resources/Pachacuti/Sky/bright_stars.csv" Link="bright_stars.csv" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="NUnit" Version="3.14.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+  </ItemGroup>
+</Project>

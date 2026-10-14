@@ -1,0 +1,29 @@
+* text=auto eol=lf
+
+# Unity YAML: merge with Unity's SmartMerge (UnityYAMLMerge) when configured.
+*.unity    text merge=unityyamlmerge eol=lf
+*.prefab   text merge=unityyamlmerge eol=lf
+*.asset    text merge=unityyamlmerge eol=lf
+*.mat      text merge=unityyamlmerge eol=lf
+*.anim     text merge=unityyamlmerge eol=lf
+*.controller text merge=unityyamlmerge eol=lf
+*.meta     text eol=lf
+
+*.cs       text diff=csharp eol=lf
+*.shader   text eol=lf
+*.hlsl     text eol=lf
+
+# Binary assets. Hero meshes, textures and audio from week 3 onward should go
+# through Git LFS (see docs/TECH_PLAN_UNITY.md); fonts are small enough to keep.
+*.ttf  binary
+*.otf  binary
+*.png  binary
+*.jpg  binary
+*.psd  binary
+*.fbx  binary
+*.glb  binary
+*.wav  binary
+*.ogg  binary
+*.mp3  binary
+*.exr  binary
+*.pdf  binary
