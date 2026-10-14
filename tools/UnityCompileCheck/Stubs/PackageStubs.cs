@@ -171,6 +171,12 @@ namespace UnityEngine.Rendering.Universal
     {
         public static UniversalAdditionalCameraData GetUniversalAdditionalCameraData(this Camera camera) => null;
     }
+    // Real base is RenderPipelineAsset<UniversalRenderPipeline> (Unity 2023+); 2021.3 refs only have the non-generic one.
+    public partial class UniversalRenderPipelineAsset : RenderPipelineAsset
+    {
+        public override RenderPipeline CreatePipeline() => null; // protected in Unity; public in the 2021.3 reference assembly
+        public float renderScale { get; set; }
+    }
 }
 
 #if PACHACUTI_COMPILECHECK_TESTS

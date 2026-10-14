@@ -119,5 +119,8 @@ namespace Pachacuti.Core
 
         // ---------------------------------------------------------------- §4 World
         public const float FogDrawDistance = 60f;
+
+        // ---------------------------------------------------------------- §13 Tech
+        public const int RenderMaxHeight = 1080;         // §5/§13 "60 fps on an integrated GPU at 1080p"
     }
 }

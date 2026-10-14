@@ -1,3 +1,4 @@
+using Pachacuti.Core;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -21,6 +22,7 @@ namespace Pachacuti
     {
         Volume _night, _vision, _day;
         ColorAdjustments _visionColor;
+        int _scaledForHeight;
         public PostRig Current { get; private set; }
 
         public static PostFx Create(Transform parent, Camera camera)
@@ -108,6 +110,20 @@ namespace Pachacuti
             _night.weight = 1f; // base layer stays under the others
             _vision.weight = rig == PostRig.Vision ? 1f : 0f;
             _day.weight = rig == PostRig.Day ? 1f : 0f;
+        }
+
+        /// <summary>
+        /// Holds the §13 budget (1080p) on high-DPI screens. Browsers and full-screen players draw
+        /// at the panel's native resolution (a 3000×2000 laptop is ~3× the pixels), so the 3D view
+        /// renders at most Tuning.RenderMaxHeight lines and is upscaled; IMGUI text stays native.
+        /// Players only: in the Editor this would be written into the pipeline asset.
+        /// </summary>
+        void Update()
+        {
+            if (Application.isEditor || Screen.height == _scaledForHeight) return;
+            _scaledForHeight = Screen.height;
+            if (GraphicsSettings.currentRenderPipeline is UniversalRenderPipelineAsset urp)
+                urp.renderScale = Mathf.Min(1f, Tuning.RenderMaxHeight / (float)Mathf.Max(1, Screen.height));
         }
 
         /// <summary>Per-shot grading inside the vision (e.g. the time strobe's snapshots).</summary>

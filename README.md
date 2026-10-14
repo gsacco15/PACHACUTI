@@ -42,8 +42,9 @@ Editor** — the build container has no Unity licence. Expect a first-open pass:
 
 ## First open
 
-1. Install **Unity Hub** and **Unity 6.3 LTS** (any `6000.3.x`) with *WebGL Build Support*
-   (and *Windows Build Support* for PC builds). If Hub asks which editor to use, pick your 6.3 LTS.
+1. Install **Unity Hub** and **Unity 6.3 LTS** (any `6000.3.x`) with *Web Build Support*
+   (older Hubs call it *WebGL Build Support*). PC builds on a Windows machine need nothing
+   extra. If Hub asks which editor to use, pick your 6.3 LTS.
 2. *Add project from disk* → this folder. The first import downloads URP 17.3, the Input
    System and the Test Framework, and takes a few minutes.
 3. Menu **PACHACUTI → Play Slice** (Ctrl/Cmd+Shift+P), or open
@@ -57,6 +58,21 @@ Editor** — the build container has no Unity licence. Expect a first-open pass:
 
 If something is pink, check *Project Settings → Graphics* has `PachacutiURP` assigned
 (**PACHACUTI → Validate Project Setup** fixes it).
+
+### On a laptop (e.g. a 16 GB Surface)
+
+The slice is budgeted for an integrated-GPU laptop at 1080p (§13), and the project is small
+(primitives, no imported art), so 16 GB is enough for the Editor, Play mode and builds.
+
+- Plug in and set Windows' power mode to *Best performance*; laptops throttle on battery.
+- In the Editor, set the Game view to **1920×1080**. A high-DPI panel at its native size
+  (a Surface is ~3000×2000) draws about three times the pixels. Builds cap the 3D render at
+  1080 lines themselves (`PostFx`); subtitles stay sharp.
+- With a discrete GPU (Surface Book 2/3 keyboard base, Surface Laptop Studio): *Settings →
+  System → Display → Graphics* → set Unity and your browser to *High performance*. On a
+  Surface Book, keep the screen docked while Unity runs: the GPU is in the base.
+- Close other heavy apps while building. The first open (package import, shader compile) and
+  the first Web build (IL2CPP → WebAssembly) take many minutes; later ones are much quicker.
 
 ## Controls (§10)
 

@@ -51,6 +51,7 @@ and acts the result out. The full game's strategy sim goes in Core the same way.
 | Lights | ≤8 point lights + 1 directional | `Torch.ApplyBudget` keeps the nearest 8; URP asset: 8 per-object lights, no additional-light shadows |
 | Shadows | one cascade, moon, 2k | URP asset: 1 cascade, 2048, 60 m |
 | Frame | 16 ms (vision 20 ms with bloom) | Bloom only in the Vision profile; MSAA 2× in the browser quality level |
+| Resolution | 1080p | Browsers render at the device pixel ratio (~3000×2000 on a Surface); `PostFx` sets the URP render scale so the 3D view is ≤1080 lines in builds (`Tuning.RenderMaxHeight`); the UI stays native. In the Editor, set the Game view to 1920×1080 |
 | Download | <60 MB | Reported by `SliceBuild` after every build |
 
 Quality levels: **Browser** (default for WebGL) and **Desktop**.
