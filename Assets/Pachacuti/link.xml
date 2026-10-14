@@ -1,0 +1,13 @@
+<linker>
+  <!--
+    The grey-box is built entirely from code (GameObject.CreatePrimitive, AddComponent,
+    procedural audio and particles), so neither the managed linker nor WebGL's native
+    engine-code stripping can see most of what the slice uses. Keep those modules.
+  -->
+  <assembly fullname="UnityEngine.PhysicsModule" preserve="all" />
+  <assembly fullname="UnityEngine.AudioModule" preserve="all" />
+  <assembly fullname="UnityEngine.ParticleSystemModule" preserve="all" />
+  <assembly fullname="UnityEngine.IMGUIModule" preserve="all" />
+  <assembly fullname="UnityEngine.TextRenderingModule" preserve="all" />
+  <assembly fullname="Pachacuti.Runtime" preserve="all" />
+</linker>

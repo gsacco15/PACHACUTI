@@ -1,0 +1,30 @@
+name: Checks
+
+# Licence-free checks that run on every push: the engine-free Core tests, and a
+# C# type-check of the Unity runtime, editor scripts and PlayMode tests.
+on:
+  push:
+  pull_request:
+
+jobs:
+  core-and-compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - name: Core unit tests
+        run: dotnet test tools/CoreTests --logger "console;verbosity=normal"
+      - name: Type-check runtime (player)
+        run: dotnet build tools/UnityCompileCheck
+      - name: Type-check editor scripts and PlayMode tests
+        run: dotnet build tools/UnityCompileCheck -p:UnityEditor=true
+      - name: Every asset has a .meta file
+        run: |
+          python3 tools/gen_meta.py | tee meta.log
+          if ! grep -q "created 0 .meta" meta.log || grep -q "orphan meta" meta.log; then
+            echo "::error::Missing or orphaned .meta files. Run python3 tools/gen_meta.py and commit."
+            git status --short
+            exit 1
+          fi

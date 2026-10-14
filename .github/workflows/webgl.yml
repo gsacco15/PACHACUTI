@@ -1,0 +1,52 @@
+name: WebGL build & deploy
+
+# Builds the browser slice with GameCI and publishes it to GitHub Pages.
+# Manual only. Needs repository secrets UNITY_LICENSE (contents of the .ulf), UNITY_EMAIL and
+# UNITY_PASSWORD (see https://game.ci/docs/github/activation), and Pages set to "GitHub Actions".
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: webgl
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-WebGL-${{ hashFiles('Packages/manifest.json', 'ProjectSettings/ProjectVersion.txt') }}
+          restore-keys: Library-WebGL-
+      - name: Build WebGL
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: WebGL
+          buildMethod: Pachacuti.EditorTools.SliceBuild.WebGL
+          customParameters: -buildPath build/WebGL
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/WebGL
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
