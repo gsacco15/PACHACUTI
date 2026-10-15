@@ -1,15 +1,15 @@
 name: WebGL build & deploy
 
-# Builds the browser slice with GameCI and publishes it to GitHub Pages.
+# Builds the browser slice with GameCI and force-pushes the finished site (index.html + Build/)
+# as a single commit to the `webgl-build` branch. The Vercel project deploys that branch
+# (Vercel → Settings → Git → Production Branch = webgl-build); Vercel cannot run Unity itself.
 # Manual only. Needs repository secrets UNITY_LICENSE (contents of the .ulf), UNITY_EMAIL and
-# UNITY_PASSWORD (see https://game.ci/docs/github/activation), and Pages set to "GitHub Actions".
+# UNITY_PASSWORD (see https://game.ci/docs/github/activation).
 on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: webgl
@@ -37,16 +37,17 @@ jobs:
           targetPlatform: WebGL
           buildMethod: Pachacuti.EditorTools.SliceBuild.WebGL
           customParameters: -buildPath build/WebGL
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: build/WebGL
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Push the site to the webgl-build branch
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+          TOKEN: ${{ github.token }}
+        run: |
+          sudo chown -R "$(id -u):$(id -g)" build   # GameCI's container writes as root
+          test -f build/WebGL/index.html
+          cd build/WebGL
+          git init -q -b webgl-build
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "WebGL build of ${SOURCE_SHA}"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" webgl-build

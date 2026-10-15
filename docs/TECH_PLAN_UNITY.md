@@ -16,7 +16,7 @@ laptop — built in Unity so the code carries into the PC game.
 | Stars | star catalog JSON + astronomy-engine | HYG bright-star extract (CSV) + `Pachacuti.Core.Astronomy` (Meeus: Julian calendar, proper motion, precession, alt/az) — tested |
 | Post | EffectComposer: bloom (vision only), vignette, grain, LUT per rig | URP Volumes: Night / Vision / Day profiles swapped by weight in one frame; LUTs via Color Lookup when the colourist delivers them |
 | UI | DOM/canvas | IMGUI (`Overlay`): subtitles, two prompts, quipu numerals, sky cursor. UI Toolkit when UI art exists |
-| Hosting | itch.io / Netlify | Same. Brotli + decompression fallback also covers GitHub Pages |
+| Hosting | itch.io / Netlify | Vercel (deploys the `webgl-build` branch that CI pushes). Brotli + decompression fallback also covers itch.io, Netlify and GitHub Pages |
 
 ## Architecture (§13 file plan → this project)
 

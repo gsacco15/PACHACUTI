@@ -95,16 +95,19 @@ On the web build `?reducedflash=1` turns it on from the link.
 ## Build and share a link
 
 **PACHACUTI → Build → WebGL (browser link)** writes `Builds/WebGL` (Brotli with decompression
-fallback, so it works on itch.io, Netlify and GitHub Pages alike) and logs the size against
+fallback, so it works on itch.io, Netlify, Vercel and GitHub Pages alike) and logs the size against
 the 60 MB budget. Upload the folder's contents. Batch mode / CI:
 
 ```
 Unity -batchmode -quit -projectPath . -executeMethod Pachacuti.EditorTools.SliceBuild.WebGL
 ```
 
-The *WebGL build & deploy* GitHub workflow (manual trigger) does the same with GameCI and
-publishes to GitHub Pages once the `UNITY_LICENSE`, `UNITY_EMAIL` and `UNITY_PASSWORD`
-secrets are set. **PACHACUTI → Build → Windows (PC)** builds the desktop player from the same project.
+The *WebGL build & deploy* GitHub workflow (manual trigger) does the same with GameCI once the
+`UNITY_LICENSE`, `UNITY_EMAIL` and `UNITY_PASSWORD` secrets are set, and force-pushes the
+finished site to the `webgl-build` branch. The Vercel project deploys that branch (Vercel →
+Settings → Git → Production Branch = `webgl-build`). Vercel can't run Unity, so it never builds
+this source branch; `vercel.json` turns those deployments off.
+**PACHACUTI → Build → Windows (PC)** builds the desktop player from the same project.
 
 At the end of a run the build prints `[PACHACUTI] PLAYTEST {…}` to the console (the
 browser console on WebGL): time per beat, street resets, Tupa outcome, quipu tries per cord,
