@@ -197,8 +197,7 @@ namespace Pachacuti
         void ApplyVisionRig()
         {
             RenderSettings.fog = false;
-            RenderSettings.ambientMode = AmbientMode.Flat;
-            RenderSettings.ambientLight = new Color(0.11f, 0.08f, 0.24f);
+            Ambient.Set(new Color(0.11f, 0.08f, 0.24f));
             if (Moon != null) Moon.enabled = false;
             _sun.enabled = true;
             _sun.color = new Color(1f, 0.78f, 0.45f);
@@ -218,8 +217,7 @@ namespace Pachacuti
             RenderSettings.fogMode = FogMode.ExponentialSquared;
             RenderSettings.fogColor = Greybox.Palette.Night;
             RenderSettings.fogDensity = 0.033f;
-            RenderSettings.ambientMode = AmbientMode.Flat;
-            RenderSettings.ambientLight = Greybox.Palette.NightAmbient;
+            Ambient.Set(Greybox.Palette.NightAmbient);
             if (Moon != null) Moon.enabled = true;
             if (_sun != null) _sun.enabled = false;
             Sky.SetNight();
@@ -264,7 +262,7 @@ namespace Pachacuti
             _sun.color = sun;
             _sun.intensity = intensity;
             _sun.transform.rotation = Quaternion.LookRotation(-SkyDome.Direction(alt, az));
-            RenderSettings.ambientLight = ambient;
+            Ambient.Set(ambient);
             RenderSettings.fog = fog;
             RenderSettings.fogDensity = fogDensity;
             RenderSettings.fogColor = fogColor;
@@ -484,7 +482,7 @@ namespace Pachacuti
             Q.Crowd.gameObject.SetActive(true);
             Q.Bodies.gameObject.SetActive(false);
             RenderSettings.fog = false;
-            RenderSettings.ambientLight = new Color(0.55f, 0.55f, 0.58f);
+            Ambient.Set(new Color(0.55f, 0.55f, 0.58f));
             _sun.enabled = true;
             _sun.color = new Color(1f, 0.95f, 0.85f);
             _sun.intensity = 1.6f;
@@ -499,7 +497,7 @@ namespace Pachacuti
         {
             Q.Cajamarca.gameObject.SetActive(false);
             Q.GoldRoom.gameObject.SetActive(true);
-            RenderSettings.ambientLight = new Color(0.05f, 0.04f, 0.03f);
+            Ambient.Set(new Color(0.05f, 0.04f, 0.03f));
             _sun.enabled = false;
             Post.Set(PostRig.Vision);
             Post.VisionTint(new Color(1f, 0.92f, 0.8f), 0.4f);

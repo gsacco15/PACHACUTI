@@ -47,12 +47,12 @@ namespace Pachacuti
             {
                 p.Add<Tonemapping>(true).mode.Override(TonemappingMode.ACES);
                 var c = p.Add<ColorAdjustments>(true);
-                c.postExposure.Override(0.5f);
+                c.postExposure.Override(0.65f);
                 c.contrast.Override(14f);
                 c.saturation.Override(-30f);
                 c.colorFilter.Override(new Color(0.86f, 0.92f, 1f));
                 var v = p.Add<Vignette>(true);
-                v.intensity.Override(0.38f);
+                v.intensity.Override(0.32f);
                 v.smoothness.Override(0.45f);
                 var g = p.Add<FilmGrain>(true);
                 g.intensity.Override(0.28f);

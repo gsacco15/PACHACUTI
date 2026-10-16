@@ -131,10 +131,11 @@ namespace Pachacuti
             go.transform.rotation = Quaternion.LookRotation(-SkyDome.Direction(48f, 75f));
             var l = go.AddComponent<Light>();
             l.type = LightType.Directional;
-            l.color = new Color(0.55f, 0.65f, 0.9f);
-            l.intensity = 0.5f;
-            l.shadows = LightShadows.Soft; // §13: one cascaded shadow map (moon) at 2k
-            l.shadowStrength = 0.75f;
+            l.color = new Color(0.62f, 0.72f, 0.95f);
+            l.intensity = 1.0f;
+            // §13 budgets one moon shadow map. Off in the grey-box: the first web build was missing the
+            // URP Lit shadow variant and drew lit surfaces black. Turn back on with the art pass.
+            l.shadows = LightShadows.None;
             return l;
         }
 
@@ -145,8 +146,7 @@ namespace Pachacuti
             RenderSettings.fogMode = FogMode.ExponentialSquared;
             RenderSettings.fogColor = Greybox.Palette.Night;
             RenderSettings.fogDensity = 0.033f;
-            RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
-            RenderSettings.ambientLight = Greybox.Palette.NightAmbient;
+            Ambient.Set(Greybox.Palette.NightAmbient);
             RenderSettings.skybox = null;
         }
 
