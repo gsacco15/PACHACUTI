@@ -4,6 +4,7 @@ Unity 6.3 LTS (URP) project for the PACHACUTI pitch slice. Design sources: the P
 Design Document and the Game Design Document (cite sections as §N in code comments, as the
 existing code does). Engine rationale: `docs/ENGINE_DECISION.md`; Unity mapping of the slice
 tech plan: `docs/TECH_PLAN_UNITY.md`; open design questions: `docs/SLICE_IMPLEMENTATION_NOTES.md`.
+The work list from grey-box to a finished look and feel, in order: `docs/REAL_GAME_ROADMAP.md`.
 
 ## Rules of the codebase
 

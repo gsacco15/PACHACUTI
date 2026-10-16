@@ -33,6 +33,8 @@ later weeks call for already exist in first-pass form:
 
 Placeholder everything visual and audible: primitives, procedural textures, synthesized
 audio, IMGUI subtitles. Art, animation, VO and the LUTs come from people (§13).
+What it takes to get from here to a real-looking game, step by step:
+[docs/REAL_GAME_ROADMAP.md](docs/REAL_GAME_ROADMAP.md).
 
 **Verification so far.** The engine-free rules (`Pachacuti.Core`) have 77 unit tests that
 pass headless. All runtime, editor and test C# compiles against Unity reference assemblies
