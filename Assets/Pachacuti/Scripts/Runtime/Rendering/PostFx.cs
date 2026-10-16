@@ -45,15 +45,17 @@ namespace Pachacuti
         {
             _night = MakeVolume("Night", 10f, p =>
             {
-                p.Add<Tonemapping>(true).mode.Override(TonemappingMode.ACES);
+                // Neutral, not ACES: the night lives in low linear values, where the ACES toe crushed the
+                // grey-box to ~4 % mean brightness in the Editor (Neutral alone tripled it).
+                p.Add<Tonemapping>(true).mode.Override(TonemappingMode.Neutral);
                 var c = p.Add<ColorAdjustments>(true);
                 c.postExposure.Override(0.65f);
                 c.contrast.Override(14f);
                 c.saturation.Override(-30f);
                 c.colorFilter.Override(new Color(0.86f, 0.92f, 1f));
                 var v = p.Add<Vignette>(true);
-                v.intensity.Override(0.32f);
-                v.smoothness.Override(0.45f);
+                v.intensity.Override(0.22f);
+                v.smoothness.Override(0.4f);
                 var g = p.Add<FilmGrain>(true);
                 g.intensity.Override(0.28f);
                 g.response.Override(0.7f);

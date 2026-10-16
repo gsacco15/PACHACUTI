@@ -40,7 +40,7 @@ namespace Pachacuti
             var tunicMat = MaterialKit.Lit(tunic, Surface.Plain, 0.05f);
             var skinMat = MaterialKit.Lit(skin, Surface.Plain, 0.2f);
 
-            float bodyH = height * 0.82f;
+            float bodyH = height - 0.21f; // capsule top just under the head (centre height - 0.12, radius 0.11): no floating heads
             h.Body = Greybox.Primitive(root.transform, PrimitiveType.Capsule, "Body", Vector3.zero, new Vector3(0.42f, bodyH * 0.5f, 0.3f), tunicMat).transform;
             h.Body.localPosition = new Vector3(0, bodyH * 0.5f, 0);
             h.Head = Greybox.Primitive(root.transform, PrimitiveType.Sphere, "Head", Vector3.zero, Vector3.one * 0.22f, skinMat).transform;
