@@ -25,7 +25,8 @@ namespace Pachacuti
             public static readonly Color Gold = new Color(1f, 0.74f, 0.3f);
             public static readonly Color Limestone = new Color(0.66f, 0.63f, 0.57f);
             public static readonly Color Cloth = new Color(0.45f, 0.36f, 0.27f);
-            public static readonly Color Night = new Color(0.035f, 0.045f, 0.06f);
+            public static readonly Color Night = new Color(0.055f, 0.07f, 0.095f);        // fog and sky at the horizon
+            public static readonly Color NightAmbient = new Color(0.10f, 0.11f, 0.15f);   // fill light so roofs and people read
         }
 
         public static Color ColorFor(Surface s)

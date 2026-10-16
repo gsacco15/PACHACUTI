@@ -219,7 +219,7 @@ namespace Pachacuti
             RenderSettings.fogColor = Greybox.Palette.Night;
             RenderSettings.fogDensity = 0.033f;
             RenderSettings.ambientMode = AmbientMode.Flat;
-            RenderSettings.ambientLight = new Color(0.035f, 0.04f, 0.06f);
+            RenderSettings.ambientLight = Greybox.Palette.NightAmbient;
             if (Moon != null) Moon.enabled = true;
             if (_sun != null) _sun.enabled = false;
             Sky.SetNight();

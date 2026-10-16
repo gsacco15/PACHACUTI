@@ -28,6 +28,11 @@ namespace Pachacuti.EditorTools
             PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Brotli;
             PlayerSettings.WebGL.decompressionFallback = true;
             PlayerSettings.WebGL.dataCaching = true;
+#if UNITY_2022_1_OR_NEWER // absent from the 2021 reference assemblies the compile check uses
+            // A shader variant missing from the build falls back to the nearest one instead of not drawing:
+            // the first web build drew every lit surface black for want of one URP Lit variant.
+            PlayerSettings.strictShaderVariantMatching = false;
+#endif
             Build(BuildTarget.WebGL, BuildTargetGroup.WebGL, path);
         }
 

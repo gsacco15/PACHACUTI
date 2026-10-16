@@ -47,7 +47,7 @@ namespace Pachacuti
             {
                 p.Add<Tonemapping>(true).mode.Override(TonemappingMode.ACES);
                 var c = p.Add<ColorAdjustments>(true);
-                c.postExposure.Override(0.35f);
+                c.postExposure.Override(0.5f);
                 c.contrast.Override(14f);
                 c.saturation.Override(-30f);
                 c.colorFilter.Override(new Color(0.86f, 0.92f, 1f));

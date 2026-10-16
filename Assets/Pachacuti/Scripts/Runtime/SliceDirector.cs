@@ -132,7 +132,7 @@ namespace Pachacuti
             var l = go.AddComponent<Light>();
             l.type = LightType.Directional;
             l.color = new Color(0.55f, 0.65f, 0.9f);
-            l.intensity = 0.14f;
+            l.intensity = 0.5f;
             l.shadows = LightShadows.Soft; // §13: one cascaded shadow map (moon) at 2k
             l.shadowStrength = 0.75f;
             return l;
@@ -146,7 +146,7 @@ namespace Pachacuti
             RenderSettings.fogColor = Greybox.Palette.Night;
             RenderSettings.fogDensity = 0.033f;
             RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
-            RenderSettings.ambientLight = new Color(0.035f, 0.04f, 0.06f);
+            RenderSettings.ambientLight = Greybox.Palette.NightAmbient;
             RenderSettings.skybox = null;
         }
 
